@@ -12,7 +12,7 @@ jobs:
       - name: Download file from website
         run: |
           # Replace the URL with your target file's URL and name your output file
-          curl -L "https://www.ncei.noaa.gov/archive/accession/download/12632" -o "LTM_FlowerGardens2002-2006.zip"
+          curl -L "https://www.ncei.noaa.gov/archive/accession/download/12632" -o "https://github.com/CU-ESIIL/oxygen_on_coralreefs/tree/main/data/LTM_FlowerGardens2002-2006.zip"
 
       - name: Commit and push directly to repo
         run: |
