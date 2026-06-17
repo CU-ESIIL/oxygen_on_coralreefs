@@ -1,12 +1,14 @@
-# [Your Name]
+# Wyatt Million
 
-Welcome to the [Your Name] repository, part of the Environmental Data Science Innovation and Inclusion Lab (ESIIL). This repository serves as the central hub for our research at ESIIL, hosting your project description, proposals, bio, codebase, and more.
+Welcome to the project repository of Wyatt Million, part of the Environmental Data Science Innovation and Impact Lab (ESIIL). This repository serves as the central hub for our research at ESIIL, hosting your project description, proposals, bio, codebase, and more.
 
-## Your Project
+## Leveraging dissolved oxygen to predict coral ecology
 
-[Provide a brief overview of your project here. Explain what you aim to achieve, the importance of your project, and its expected impact.]
+This project's objectives are to synthesize disparate in situ dissolved oxygen datasets with historical coral bleaching, reef health, and species distributions datasets to identify features of reef oxygen dynmaics that can help predict species occurances and bleaching events on tropical coral reefs. Oxygen availability has been largely ignored in predictions of reef health but given the intensifying deoxygenation in the world's oceans and coral's dependence on oxygen for energy production, incorporation of oxygen dynamics stands to improve our understanding of reef ecology and conservation. 
 
-## Project Proposal
+## Project Background
+
+Tropical coral reefs around the world are threatened by a combination of intensifying anthropogenic factors, which have triggered drastic declines in reef-building coral abundance and diversity through mass bleaching (i.e., the loss of photosynthetic symbionts from the coral host animal) and habitat degradation. Increasing temperature has been considered the primary driver of coral declines, but a growing body of evidence suggests low oxygen (O2) availability, alone and in combination with increased temperature, can trigger mortality. Similarly, reduced O2 degrades habitat quality by limiting coral energy production, favoring macroalgal-dominated communities, and limiting recruitment of offspring. Decreases in O2 availability, i.e., deoxygenation, are expected to intensify with climate change8, prompting recent efforts to classify aquatic deoxygenation as the next planetary boundary. Despite this, environmental stress on natural reefs is most commonly quantified with tools based on temperature alone, e.g., Degree Heating Weeks (DHW) for cumulative heat stress and Maximum Monthly Mean (MMM) for historical thermal conditions. Therefore, this project will develop standardized metrics of reef oxygen dynamics, test their power to predict bleaching events, and explore how oxygen environments shape coral ecology and symbiosis. This characterization of reef O2 dynamics and low O2 stress will be vital for reef restoration practitioners, environmental policy makers, and stakeholders to establish historical baselines, track ongoing stress events, and predict outcomes of intensifying deoxygenation as climates change.
 
 [Link to the detailed project proposal document or include the proposal directly in the repository. This should outline the goals, methodologies, anticipated challenges, and projected timelines.]
 
