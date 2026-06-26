@@ -1,52 +1,58 @@
-site_name: 'ESIIL Postdoctoral Researcher OASIS'
-site_description: 'Central resource for ESIIL postdoctoral researchers'
-site_author: Ty Tuff
+site_name: 'Oxygen on Coral Reefs'
+site_description: 'ESIIL project repository and website for leveraging dissolved oxygen to predict coral reef ecology'
+site_author: Wyatt Million
 site_url: https://cu-esiil.github.io/oxygen_on_coralreefs
 
 # Repository
 repo_name: oxygen_on_coralreefs
 repo_url: https://github.com/CU-ESIIL/oxygen_on_coralreefs
+# The edit URI points MkDocs Material at the docs/ source so page edit links open in GitHub edit mode.
 edit_uri: edit/main/docs/
-# Copyright
-copyright: 'Copyright &copy; 2023 University of Colorado Boulder'
+copyright: 'Copyright &copy; 2026 University of Colorado Boulder'
 
 # Page tree
 nav:
   - Home: index.md
-  - Resources:
-       - Code of Conduct: resources/code-of-conduct.md
-       - Participant agreement: resources/participant_agreement.md
-       - R and Python bilingualism: resources/bilingualism_md.md
-       - STAC: resources/stac_mount_save.md
-       - Sentinal 2 STAC example: resources/Pull_Sentinal2_l2_data.md
-       - Markdown: resources/markdown_basics.md
-       - Cyverse basics: resources/cyverse_basics.md
-       - Github basics: resources/github_basics.md
-       - Cyverse hacks: resources/cyverse_hacks.md
-       - Docker basics: resources/docker_basics.md
-       - Working groups: resources/working_groups_and_postdocs.md
+  - Work Plan: work-plan.md
+  - How This Project Works: how-this-group-works.md
+  - ESIIL and Team Resources:
+      - Team Trainings: esiil-resources/team-trainings.md
+      - ESIIL Code of Conduct: esiil-resources/code-of-conduct.md
+      - Community Care: community-care.md
+  - Project Resources:
+      - Cloud Triangle: resources/cloud-triangle.md
+      - Cite and Reuse: resources/cite-and-reuse.md
+      - R and Python bilingualism: resources/bilingualism_md.md
+      - STAC: resources/stac_mount_save.md
+      - Sentinel 2 STAC example: resources/Pull_Sentinal2_l2_data.md
+      - Markdown: resources/markdown_basics.md
+      - CyVerse basics: resources/cyverse_basics.md
+      - GitHub basics: resources/github_basics.md
+      - CyVerse hacks: resources/cyverse_hacks.md
+      - Docker basics: resources/docker_basics.md
+      - Working groups: resources/working_groups_and_postdocs.md
   - Notes:
-       - OASIS orientation: resources/pre_meeting_notes.md
-  - Code documentation:
-       - Data processing: resources/data_processing.md
-       - Data analysis: resources/data_analysis.md
-       - Visualizations: resources/visualizations.md 
-  - Manuscript drafts:
-       - Manuscript: resources/manuscript.md
+      - OASIS orientation: resources/pre_meeting_notes.md
+      - First meeting notes: resources/first_meeting_notes.md
+      - Post meeting notes: resources/post_meeting_notes.md
+      - Third meeting notes: resources/third_meeting_notes.md
+  - Code Documentation:
+      - Data processing: resources/data_processing.md
+      - Data analysis: resources/data_analysis.md
+      - Visualizations: resources/visualizations.md
+  - Manuscript Drafts:
+      - Manuscript: resources/manuscript.md
   - References:
-       - Notes from readings: resources/notes_from_readings.md
-       - Citations: resources/citations.md
+      - Notes from readings: resources/notes_from_readings.md
+      - Citations: resources/citations.md
 
 # Configuration
 theme:
   highlightjs: true
   name: material
-  font:
-    text: 'Open Sans'
-    code: 'Roboto Mono'
+  font: false
   logo: 'assets/esiil_content/ESIIL_logo.png'
   favicon: 'assets/esiil_content/favicon.ico'
-  # setting features for the navigation tab
   features:
     - navigation.sections
     - navigation.instant
@@ -55,18 +61,15 @@ theme:
     - navigation.top
     - toc.integrate
     - toc.follow
+    - content.action.edit
     - content.code.copy
-  # Default values, taken from mkdocs_theme.yml
   language: en
   palette:
-    # Palette toggle for light mode
-    - media: "(prefers-color-scheme: white)"
+    - media: "(prefers-color-scheme: light)"
       primary: 'white'
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
-
-    # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       toggle:
@@ -77,12 +80,20 @@ theme:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/cu-esiil/
+      link: https://github.com/CU-ESIIL/oxygen_on_coralreefs
+
+extra_css:
+  - stylesheets/tokens.css
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - attr_list
+  - pymdownx.snippets:
+      base_path:
+        - docs
+
+validation:
+  omitted_files: ignore
 
 plugins:
-    - search
-    - mkdocstrings
-    - git-revision-date
-    - mkdocs-jupyter:
-          include_source: True
-          ignore_h1_titles: True
+  - search

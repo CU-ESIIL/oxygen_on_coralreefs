@@ -1,74 +1,79 @@
 [![DOI](https://zenodo.org/badge/733258046.svg)](https://zenodo.org/doi/10.5281/zenodo.11166823)
 
-# Postdoc OASIS
-This is the central hub for information pertaining to ESIIL Postdocs
+# Oxygen on Coral Reefs
 
-# [Your Name]
+This repository supports Wyatt Million's ESIIL project, **Leveraging dissolved oxygen to predict coral ecology**. It is both a research repository and the source for the public MkDocs website at https://cu-esiil.github.io/oxygen_on_coralreefs.
 
-Welcome to the [Your Name] repository, part of the Environmental Data Science Innovation and Inclusion Lab (ESIIL). This repository serves as the central hub for our research at ESIIL, hosting your project description, proposals, bio, codebase, and more.
+The repository and website are meant to work as one connected system:
 
-## Your Project
+- The repository is where data, code, notes, and synthesis products are organized and versioned.
+- The website is where project context, methods, resources, and outputs are shared.
+- GitHub connects them through commits, version history, and automated publishing.
 
-[Provide a brief overview of your project here. Explain what you aim to achieve, the importance of your project, and its expected impact.]
+## Project
 
-## Project Proposal
+This project synthesizes in situ dissolved oxygen datasets with historical coral bleaching, reef health, and species distribution datasets. The goal is to identify features of reef oxygen dynamics that can help predict species occurrences and bleaching events on tropical coral reefs.
 
-[Link to the detailed project proposal document or include the proposal directly in the repository. This should outline the goals, methodologies, anticipated challenges, and projected timelines.]
+Oxygen availability has often been left out of reef health prediction, even though ocean deoxygenation is intensifying and corals depend on oxygen for energy production. Incorporating oxygen dynamics may improve reef ecology, conservation planning, restoration decisions, and environmental stress forecasting.
 
-## Collaborators and Co-Authors 
+## How this repository is organized
 
-[List the names and a brief description of people you work with, possibly linking to their personal or professional web pages.]
+```text
+.
+├── README.md              # Repository overview and setup notes
+├── mkdocs.yml             # Website navigation, theme, plugins, and edit links
+├── docs/                  # Markdown source for the public website
+├── scripts/               # Build helpers and site health checks
+├── templates/             # Reusable meeting-note templates
+├── data/                  # Project data and data documentation
+├── docker/                # Optional runtime and environment setup
+└── Research_Statement_WM.pdf
+```
 
-- **Collaborator 1**: Brief description.
-- **Collaborator 2**: Brief description.
-- ...
+Use these rules of thumb when deciding where to put something:
 
-## Code Repository
+- Top-level files and folders are for project configuration, automation, contribution guidance, licensing, environment setup, and repo-wide metadata.
+- `docs/` is for public website pages and assets. Markdown files here become website pages through MkDocs.
+- `mkdocs.yml` controls how the website is rendered, including navigation, theme settings, plugins, and GitHub edit links.
+- Scientific working materials belong in working folders such as `data/`, notebooks, scripts, workflows, outputs, and figure directories.
 
-This section of the repository will include all the code developed for the project. You can structure it as follows:
+## Common places to edit
 
-- **Analysis Code**: Scripts for data analysis, statistical modeling, etc.
-- **Data Processing**: Scripts for cleaning, merging, and managing datasets.
-- **Visualization**: Code for creating figures, charts, and interactive visualizations.
+- `docs/index.md` is the homepage for the public site.
+- `docs/work-plan.md` tracks milestones, meetings, and outputs.
+- `docs/how-this-group-works.md` holds collaboration norms, data references, code organization, and methods guidance.
+- `docs/esiil-resources/` contains ESIIL training and code-of-conduct pages.
+- `docs/instructions/` contains practical instructions for GitHub, persistent storage, project phases, and landmarks.
+- `docs/assets/images/slots/` contains named image slots for the homepage and other shared visuals.
+- `docs/assets/images/process/` contains folder-driven process galleries that render automatically on the site.
 
-## Meeting Notes and Agendas
+## Preview locally
 
-When you meet with your advisor, collaborators, or a team, you should take notes here. 
+```bash
+pip install -r requirements.txt
+python scripts/generate_image_slots.py
+python scripts/site_health.py
+mkdocs serve
+```
 
-## Contributing to This Repository
+## Build site
 
-To maintain the quality and integrity of the repository, please adhere to the following guidelines:
+```bash
+python scripts/generate_image_slots.py
+python scripts/site_health.py
+mkdocs build --strict --clean
+```
 
-- Make sure all commits have a clear and concise message.
-- Document any major changes or decisions in the meeting notes.
-- Review and merge changes through pull requests to ensure oversight.
+## Swapping homepage images
 
-## Getting Help
+The site uses semantic image slots so project contributors do not need to edit Markdown links every time an image changes.
 
-If you encounter any issues or have questions about how to contribute, please refer to the [ESIIL Support Page](https://esiil.org/support) or contact the repository maintainers directly.
+1. Open the relevant folder in `docs/assets/images/slots/`.
+2. Delete the old image file.
+3. Add one new `.png`, `.jpg`, `.jpeg`, `.webp`, or `.svg` file.
+4. Run `python scripts/generate_image_slots.py`.
+5. Commit the image change and the regenerated slot references.
 
-## Customize Your Repository
+## GitHub Pages
 
-As a new working group, you'll want to make this repository your own. Here's how to get started:
-
-1. **Edit This Readme**: Replace the placeholder content with information about your specific project. Ensure that the introduction, project overview, and objectives clearly reflect your group's research focus.
-
-2. **Update Bio**: Add details about your expertise, role in the project, and professional background. Include links to personal or professional web pages to foster community engagement and collaboration.
-
-3. **Organize Your Code**: Structure your codebase in a way that is logical and accessible. Use directories and clear naming conventions to make it easy for all members to find and contribute to different parts of the project.
-
-4. **Document Your Data**: Include a data directory with README files explaining the datasets, sources, and any preprocessing steps. This will help new members understand and work with the project's data effectively.
-
-5. **Outline Your Methods**: Create a detailed METHODS.md file where you describe the methodologies, software, and tools you will be using in your research. This transparency will support reproducibility and collaborative development.
-
-6. **Set Up Project Management**: Utilize the 'Issues' and 'Projects' features on GitHub to track tasks, discuss ideas, and manage your workflow. This can help in maintaining a clear view of progress and priorities.
-
-7. **Add a License**: Choose and include an appropriate open-source license for your project, ensuring that the broader community understands how they can use and contribute to your work.
-
-8. **Create Contribution Guidelines**: Establish a CONTRIBUTING.md file with instructions for members on how to propose changes, submit issues, and contribute code.
-
-9. **Review and Merge Workflow**: Decide on a workflow for reviewing and merging changes. Will you use branch protection? Who will have merge privileges? Document this process to avoid confusion.
-
-10. **Establish Communication Channels**: Beyond GitHub, set up additional communication channels like Slack, Discord, or email lists for quick and informal discussions.
-
-Remember, the goal is to make your repository clear, accessible, and useful for all current and future members of your working group. Happy researching!
+This site is automatically built and deployed using GitHub Actions. The build generates image slot references, writes a non-blocking site health report, and then runs `mkdocs build --strict --clean`.

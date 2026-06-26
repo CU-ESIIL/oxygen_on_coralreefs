@@ -1,68 +1,93 @@
-# Wyatt Million
+# Leveraging Dissolved Oxygen to Predict Coral Ecology
 
-Welcome to the project repository of Wyatt Million, part of the Environmental Data Science Innovation and Impact Lab (ESIIL). This repository serves as the central hub for our research at ESIIL, hosting your project description, proposals, bio, codebase, and more.
+This repository and website support Wyatt Million's ESIIL project on dissolved oxygen dynamics and coral reef ecology. The repository is the working record for data, analysis, notes, and synthesis; the website is the public-facing layer for project context, methods, and outputs.
 
-## Leveraging dissolved oxygen to predict coral ecology
+[Edit this homepage in GitHub](https://github.com/CU-ESIIL/oxygen_on_coralreefs/edit/main/docs/index.md){ .md-button .md-button--secondary }
+[Open the GitHub repository](https://github.com/CU-ESIIL/oxygen_on_coralreefs){ .md-button }
+[Read the project proposal](https://github.com/CU-ESIIL/oxygen_on_coralreefs/blob/main/Research_Statement_WM.pdf){ .md-button .md-button--secondary }
 
-This project's objectives are to synthesize disparate in situ dissolved oxygen datasets with historical coral bleaching, reef health, and species distributions datasets to identify features of reef oxygen dynmaics that can help predict species occurances and bleaching events on tropical coral reefs. Oxygen availability has been largely ignored in predictions of reef health but given the intensifying deoxygenation in the world's oceans and coral's dependence on oxygen for energy production, incorporation of oxygen dynamics stands to improve our understanding of reef ecology and conservation. 
+![Placeholder image for the project overview][slot-hero]{ .homepage-hero }
 
-## Project Background
+--8<-- "_generated/slot_notes/hero.md"
 
-Tropical coral reefs around the world are threatened by a combination of intensifying anthropogenic factors, which have triggered drastic declines in reef-building coral abundance and diversity through mass bleaching (i.e., the loss of photosynthetic symbionts from the coral host animal) and habitat degradation. Increasing temperature has been considered the primary driver of coral declines, but a growing body of evidence suggests low oxygen (O2) availability, alone and in combination with increased temperature, can trigger mortality. Similarly, reduced O2 degrades habitat quality by limiting coral energy production, favoring macroalgal-dominated communities, and limiting recruitment of offspring. Decreases in O2 availability, i.e., deoxygenation, are expected to intensify with climate change8, prompting recent efforts to classify aquatic deoxygenation as the next planetary boundary. Despite this, environmental stress on natural reefs is most commonly quantified with tools based on temperature alone, e.g., Degree Heating Weeks (DHW) for cumulative heat stress and Maximum Monthly Mean (MMM) for historical thermal conditions. Therefore, this project will develop standardized metrics of reef oxygen dynamics, test their power to predict bleaching events, and explore how oxygen environments shape coral ecology and symbiosis. This characterization of reef O2 dynamics and low O2 stress will be vital for reef restoration practitioners, environmental policy makers, and stakeholders to establish historical baselines, track ongoing stress events, and predict outcomes of intensifying deoxygenation as climates change.
+## Project Abstract
 
-[Project Proposal](https://github.com/CU-ESIIL/oxygen_on_coralreefs/blob/main/Research_Statement_WM.pdf){ .md-button .md-button--secondary }
+This project synthesizes disparate in situ dissolved oxygen datasets with historical coral bleaching, reef health, and species distribution datasets to identify features of reef oxygen dynamics that can help predict species occurrences and bleaching events on tropical coral reefs.
 
+Oxygen availability has often been ignored in predictions of reef health. Given intensifying ocean deoxygenation and corals' dependence on oxygen for energy production, oxygen dynamics may improve our understanding of reef ecology, conservation planning, and the environmental stressors that shape bleaching risk.
+
+## Start Here
+
+1. Review the [work plan](work-plan.md) for current milestones, project phases, and outputs.
+2. Use [How This Project Works](how-this-group-works.md) to find data sources, code organization, methods notes, and collaboration guidance.
+3. Browse [Project Resources](resources/cloud-triangle.md) for practical guides on GitHub, compute, persistent storage, and reproducible documentation.
+4. Add figures, summaries, meeting notes, and analysis updates to the repository so the public site can stay synchronized with the science.
+
+[Plan the work](work-plan.md){ .md-button }
+[Document data and methods](how-this-group-works.md#data){ .md-button .md-button--secondary }
+[Review ESIIL resources](esiil-resources/team-trainings.md){ .md-button .md-button--secondary }
+
+## Project Landmarks
+
+Use lightweight labels to connect meeting notes, commits, and website updates:
+
+WG-A People and roles; WG-B Question and scope; WG-C Data and access; WG-D Methods and workflows; WG-E Results and synthesis; WG-F Outputs and handoff.
+
+[Use the landmark guide](instructions/working-group-landmarks.md){ .md-button .md-button--secondary }
+
+## How This Repo Is Organized
+
+The repository has two connected layers. Top-level files configure the project and automation. The `docs/` folder contains website content. `mkdocs.yml` tells MkDocs how to render that content into the public site. Scientific working materials live in project folders such as `data/`, `docs/resources/`, and future analysis or output folders.
+
+| Part of the repo | What it does | What usually belongs there |
+| --- | --- | --- |
+| Top-level files and folders | Configure the project and keep shared repository guidance in one place | `README.md`, `LICENSE`, workflows, templates, environment setup, and repo-wide metadata |
+| `docs/` | Stores source content for the public website | Homepage text, summaries, methods, resource guides, meeting notes, and website assets |
+| `mkdocs.yml` | Controls how the site is rendered | Navigation, theme settings, plugins, styling, and GitHub edit links |
+| Working folders | Hold the science-in-progress | Data references, notebooks, scripts, workflows, figures, outputs, and reproducibility materials |
+
+## Repository Side: Do the Science
+
+![Placeholder image for the repository side of the workflow][slot-repository-side]{ .slot-button-image }
+
+--8<-- "_generated/slot_notes/repository-side.md"
+
+Related landmarks: WG-C Data and access; WG-D Methods and workflows.
+
+The repository is the versioned record of the project: it tracks what changed, why it changed, and how results were produced.
+
+- Dissolved oxygen datasets and metadata
+- Data processing notes and scripts
+- Analysis workflows and visualization outputs
+- Meeting notes, decisions, and project context
+- Manuscript drafts and synthesis products
+
+## Website Side: Share the Science
+
+![Placeholder image for the website side of the workflow][slot-website-side]{ .slot-button-image }
+
+--8<-- "_generated/slot_notes/website-side.md"
+
+Related landmarks: WG-E Results and synthesis; WG-F Outputs and handoff.
+
+The website turns the working record into a readable project report for collaborators, ESIIL audiences, and other people interested in coral reef oxygen dynamics.
+
+- Plain-language project summaries
+- Methods and data documentation
+- Figures, maps, and visualizations
+- Manuscript and proposal links
+- Guidance for reuse and future handoff
+
+## Current Phase
+
+Working phase: consolidating datasets, project documentation, and website structure.
 
 ## Collaborators
-- ...
 
-## Code Repository
+Add project collaborators, roles, institutions, and responsibilities here as the team list becomes ready for the public site.
 
-This section of the repository will include all the code developed for the project. You can structure it as follows:
+![Placeholder image representing collaboration and project identity][slot-group-photo]{ .section-image }
 
-- **Analysis Code**: Scripts for data analysis, statistical modeling, etc.
-- **Data Processing**: Scripts for cleaning, merging, and managing datasets.
-- **Visualization**: Code for creating figures, charts, and interactive visualizations.
+--8<-- "_generated/slot_notes/group-photo.md"
 
-## Meeting Notes and Agendas
-
-Meeting notes and agendas will be regularly updated here to keep all group members informed and engaged with the progress and direction of the project.
-
-## Contributing to This Repository
-
-We welcome contributions from all group members. To maintain the quality and integrity of the repository, please adhere to the following guidelines:
-
-- Make sure all commits have a clear and concise message.
-- Document any major changes or decisions in the meeting notes.
-- Review and merge changes through pull requests to ensure oversight.
-
-## Getting Help
-
-If you encounter any issues or have questions about how to contribute, please refer to the [ESIIL Support Page](https://esiil.org/support) or contact the repository maintainers directly.
-
-## Customize Your Repository
-
-As a new working group, you'll want to make this repository your own. Here's how to get started:
-
-1. **Edit This Readme**: Replace the placeholder content with information about your specific project. Ensure that the introduction, project overview, and objectives clearly reflect your group's research focus.
-
-2. **Update Group Member Bios**: Add details about each group member's expertise, role in the project, and professional background. Include links to personal or professional web pages to foster community engagement and collaboration.
-
-3. **Organize Your Code**: Structure your codebase in a way that is logical and accessible. Use directories and clear naming conventions to make it easy for all members to find and contribute to different parts of the project.
-
-4. **Document Your Data**: Include a data directory with README files explaining the datasets, sources, and any preprocessing steps. This will help new members understand and work with the project's data effectively.
-
-5. **Outline Your Methods**: Create a detailed METHODS.md file where you describe the methodologies, software, and tools you will be using in your research. This transparency will support reproducibility and collaborative development.
-
-6. **Set Up Project Management**: Utilize the 'Issues' and 'Projects' features on GitHub to track tasks, discuss ideas, and manage your workflow. This can help in maintaining a clear view of progress and priorities.
-
-7. **Add a License**: Choose and include an appropriate open-source license for your project, ensuring that the broader community understands how they can use and contribute to your work.
-
-8. **Create Contribution Guidelines**: Establish a CONTRIBUTING.md file with instructions for members on how to propose changes, submit issues, and contribute code.
-
-9. **Review and Merge Workflow**: Decide on a workflow for reviewing and merging changes. Will you use branch protection? Who will have merge privileges? Document this process to avoid confusion.
-
-10. **Establish Communication Channels**: Beyond GitHub, set up additional communication channels like Slack, Discord, or email lists for quick and informal discussions.
-
-Remember, the goal is to make your repository clear, accessible, and useful for all current and future members of your working group. Happy researching!
-
+--8<-- "_generated/image_slots.md"

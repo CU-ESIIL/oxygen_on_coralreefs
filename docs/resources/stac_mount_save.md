@@ -95,7 +95,7 @@ and sweeping landscapes waiting to be captured. The STAC collection acts
 as the photographer’s deliberate choice of scene, pointing the camera
 lens—our data tools—towards the most telling and coherent dataset.
 
-![](../assets/stac_mount_save/Ansel_Adams_datacube.png) Just as Adams’
+![](../assets/esiil_content/stac_mount_save/Ansel_Adams_datacube.png) Just as Adams’
 photographs are more than mere records of a landscape, but rather a
 confluence of his vision, technique, and the scene’s natural beauty, so
 too is the data cube more than the sum of its parts. It is the artful
