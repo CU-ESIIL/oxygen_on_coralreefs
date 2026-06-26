@@ -1,181 +1,174 @@
 # Save Files To Persistent Storage
 
-Persistent storage is the shared place for large files that should survive beyond a running compute instance. Use it for data and outputs that are important to the working group but too large or too changeable for GitHub.
+This page covers moving data and larger outputs between your JupyterLab instance and persistent storage using `gocmd`. Use GitHub for code, Markdown, notebooks, and small files. Use persistent storage for files that are too large for GitHub or need to survive after the container stops.
 
-Confirm the exact shared storage path with ESIIL staff or your facilitator before moving important data.
+## The Cloud Triangle Workflow
 
-Example shared path pattern:
+In the Cloud Triangle, this page covers **instance to/from persistent storage**.
+
+!!! info "Cloud Triangle pages"
+    1. [Connect instance to GitHub](link-to-github.md)
+    2. [Instance to/from GitHub](push-to-github.md)
+    3. **Instance to/from persistent storage:** this page
+
+!!! tip "What goes where?"
+    Code and text go to GitHub. Large data and outputs go to persistent storage. Active work happens in JupyterLab.
+
+| Task | Best tool |
+|---|---|
+| Edit the website text | GitHub / Git widget |
+| Save a notebook or script | GitHub / Git widget |
+| Save a small figure used on the site | GitHub / Git widget |
+| Save a large dataset | Persistent storage / `gocmd` |
+| Save model outputs or large intermediate files | Persistent storage / `gocmd` |
+| Work interactively during a session | JupyterLab |
+| Share final public code | GitHub |
+| Share final public data | Persistent storage or approved data archive |
+
+Persistent storage is not a replacement for GitHub. It will keep your data safe, but it does not provide the same version history, issue tracking, pull requests, or website publishing workflow. For large files, save them here and commit a small note or metadata file to GitHub that explains where the data lives.
+
+## 0. One-Time Setup
+
+Open a JupyterLab terminal and install GoCommands:
+
+```bash
+# Install GoCommands (Linux x86_64)
+GOCMD_VER=$(curl -L -s https://raw.githubusercontent.com/cyverse/gocommands/main/VERSION.txt)
+curl -L -s "https://github.com/cyverse/gocommands/releases/download/${GOCMD_VER}/gocmd-${GOCMD_VER}-linux-amd64.tar.gz" | tar zxvf -
+```
+
+Configure iRODS. Accept defaults for host, port, and zone. Use your CyVerse username when prompted.
+
+```bash
+./gocmd init
+```
+
+Check that you can list your CyVerse home folder:
+
+```bash
+./gocmd ls i:/iplant/home/YOUR_USER
+```
+
+The `i:` prefix means an iRODS remote path. Local paths, such as `outputs/run-YYYYMMDD`, do not use `i:`.
+
+## 1. Set Your Project Paths
+
+Confirm the exact shared storage path with ESIIL staff before moving important data. A likely shared community folder pattern is:
 
 ```text
-i:/iplant/home/shared/esiil/working_groups/<WORKING_GROUP_NAME>/
+i:/iplant/home/shared/esiil/<PROJECT_OR_GROUP_NAME>
 ```
 
-## What Belongs Here
-
-Use persistent storage for:
-
-- raw datasets
-- rasters and large spatial files
-- model outputs
-- intermediate analysis products
-- large tables
-- shared data products
-- large figures or maps
-- files that need to survive after a JupyterLab instance stops
-
-Do not use GitHub for large raw environmental data, huge rasters, model outputs, or temporary working files. Put those files in persistent storage and commit a small README or metadata note to GitHub.
-
-## One-Time Setup
-
-Open a JupyterLab terminal and check whether GoCommands is already available:
+Set these environment variables in your terminal. Change the project path and username first.
 
 ```bash
-gocmd --help
-```
+# Edit these two lines
+PROJECT_PATH="oxygen_on_coralreefs"
+USERNAME="<your_cyverse_username>"
 
-If it is not installed, follow the current CyVerse GoCommands installation guidance provided by ESIIL staff or the CyVerse documentation.
-
-Configure iRODS:
-
-```bash
-gocmd init
-```
-
-Accept the default host, port, and zone if your facilitator confirms they are correct. Use your CyVerse username when prompted.
-
-Check that you can list your home folder:
-
-```bash
-gocmd ls i:/iplant/home/<YOUR_CYVERSE_USERNAME>
-```
-
-The `i:` prefix means an iRODS remote path. Local paths on your compute instance do not use `i:`.
-
-## Set Group Paths
-
-Replace the working group name and username before running these commands:
-
-```bash
-WORKING_GROUP_NAME="<WORKING_GROUP_NAME>"
-USERNAME="<YOUR_CYVERSE_USERNAME>"
-
-COMMUNITY="i:/iplant/home/shared/esiil/working_groups/${WORKING_GROUP_NAME}"
+COMMUNITY="i:/iplant/home/shared/esiil/${PROJECT_PATH}"
 PERSONAL="i:/iplant/home/${USERNAME}"
 ```
 
-Helpful shared folder names include:
+Use descriptive folders inside `${COMMUNITY}`, such as:
 
 - `raw_data/`
 - `processed_data/`
+- `shared_data/`
 - `outputs/`
 - `figures/`
 - `deliverables/`
 - `scratch/`
 - `metadata/`
 
-Create folders as the group needs them:
+## 2. Save Files From The Instance To Persistent Storage
+
+Use `put` to upload local files from JupyterLab to the CyVerse Data Store.
 
 ```bash
-gocmd mkdir "${COMMUNITY}/raw_data"
-gocmd mkdir "${COMMUNITY}/outputs"
-gocmd mkdir "${COMMUNITY}/metadata"
-```
-
-## Upload Files From Compute To Persistent Storage
-
-Use `put` to upload local files or folders:
-
-```bash
+# Put (upload) a local folder into your project's community space
 LOCAL_SRC="outputs/run-YYYYMMDD"
 REMOTE_DST="${COMMUNITY}/outputs/"
 
-gocmd put --progress -K --icat -r "${LOCAL_SRC}" "${REMOTE_DST}"
+./gocmd put --progress -K --icat -r "${LOCAL_SRC}" "${REMOTE_DST}"
 ```
 
-When uploading a folder again, use `--diff` so unchanged files are skipped:
+Use `--diff` when re-uploading so unchanged files are skipped:
 
 ```bash
-gocmd put --progress -K --icat --diff -r "${LOCAL_SRC}" "${REMOTE_DST}"
+./gocmd put --progress -K --icat --diff -r "${LOCAL_SRC}" "${REMOTE_DST}"
 ```
 
 Verify the upload:
 
 ```bash
-gocmd ls "${REMOTE_DST}"
+./gocmd ls "${REMOTE_DST}"
 ```
 
-## Download Files From Persistent Storage
+## 3. Bring Files From Persistent Storage Into The Instance
 
-Use `get` to bring shared files into the running compute instance:
+Use `get` to download shared data or outputs from persistent storage into the running JupyterLab instance.
 
 ```bash
+# Get (download) a shared dataset from the community folder into ./data/
 mkdir -p ./data
-
-REMOTE_SRC="${COMMUNITY}/processed_data/"
+REMOTE_SRC="${COMMUNITY}/shared_data/"
 LOCAL_DST="./data/"
 
-gocmd get --progress -K --icat -r "${REMOTE_SRC}" "${LOCAL_DST}"
+./gocmd get --progress -K --icat -r "${REMOTE_SRC}" "${LOCAL_DST}"
 ```
 
-Use this when a collaborator has prepared shared data or outputs that you need for analysis.
+Use this when collaborators have prepared shared data in persistent storage and you need a local copy for analysis.
 
-## Copy Files Within Persistent Storage
+## 4. Copy Files Between Community And Personal Storage
 
-Use `cp` to copy directly between two persistent storage locations:
+Use `cp` to copy directly between two Data Store locations.
 
 ```bash
 REMOTE_SRC="${COMMUNITY}/deliverables/"
-REMOTE_PERSONAL_DST="${PERSONAL}/working_groups/${WORKING_GROUP_NAME}/deliverables/"
+REMOTE_PERSONAL_DST="${PERSONAL}/projects/oxygen_on_coralreefs/deliverables/"
 
-gocmd cp --progress -K --icat -r "${REMOTE_SRC}" "${REMOTE_PERSONAL_DST}"
+./gocmd cp --progress -K --icat -r "${REMOTE_SRC}" "${REMOTE_PERSONAL_DST}"
 ```
 
 Verify the copied files:
 
 ```bash
-gocmd ls "${REMOTE_PERSONAL_DST}"
+./gocmd ls "${REMOTE_PERSONAL_DST}"
 ```
 
-## Compare And Sync Folders
+## 5. Record Where The Data Lives
 
-Use `sync` when you want two folders to match:
+After saving large data or outputs to persistent storage, add a small note to GitHub so collaborators can find it later.
+
+Good places for that note:
+
+- `docs/index.md`, if the data supports a public figure or result
+- `data/README_data.md`, for dataset notes
+- a small README next to the analysis code
+
+Example note:
+
+```markdown
+Large model outputs are stored in:
+`i:/iplant/home/shared/esiil/oxygen_on_coralreefs/outputs/reef-oxygen-run-01/`
+```
+
+## Troubleshooting
+
+If a path is not found, list upward and then drill down to confirm exact folder names:
 
 ```bash
-LOCAL_SRC="outputs/latest/"
-REMOTE_DST="${COMMUNITY}/outputs/latest/"
-
-gocmd sync --progress -K --icat "${LOCAL_SRC}" "${REMOTE_DST}"
+./gocmd ls i:/iplant/home/shared/esiil
+./gocmd ls "${COMMUNITY}"
 ```
 
-Be careful with sync commands. Confirm source and destination paths before running them, especially for shared folders.
+If a collection exists but transfers fail, inspect its type and permissions:
 
-## Document Shared Data
-
-Leave a README next to any shared data folder so someone else can understand what it contains. Also reference that README or storage location from GitHub.
-
-A useful data README includes:
-
-- folder path
-- short description
-- data source or provenance
-- creator or point of contact
-- date created or updated
-- processing steps
-- file formats
-- known limitations
-- reuse or citation guidance
-- whether the files are preliminary or final
-
-Example note to commit in GitHub:
-
-```text
-Large model outputs for the first synthesis run are stored in:
-i:/iplant/home/shared/esiil/working_groups/<WORKING_GROUP_NAME>/outputs/synthesis-run-01/
-
-See README.md in that folder for provenance, processing notes, and reuse guidance.
+```bash
+./gocmd stat "${COMMUNITY}/<EXACT_NAME>"
 ```
 
-Related pages:
+If a transfer is interrupted, rerun the command with `--diff` so GoCommands can skip files that already transferred.
 
-- [Cloud Triangle](../resources/cloud-triangle.md)
-- [Push and Pull with GitHub](push-to-github.md)
+More information: [CyVerse GoCommands Docs](https://learning.cyverse.org/ds/gocommands/)

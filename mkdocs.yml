@@ -21,6 +21,9 @@ nav:
       - Community Care: community-care.md
   - Project Resources:
       - Cloud Triangle: resources/cloud-triangle.md
+      - Connect JupyterLab to GitHub: instructions/link-to-github.md
+      - Push and Pull with GitHub: instructions/push-to-github.md
+      - Persistent Storage with GoCommands: instructions/save-to-persistent-storage.md
       - Cite and Reuse: resources/cite-and-reuse.md
       - R and Python bilingualism: resources/bilingualism_md.md
       - STAC: resources/stac_mount_save.md

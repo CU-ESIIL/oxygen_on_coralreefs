@@ -13,9 +13,9 @@
 - [Public-Facing Site Guide](public-facing-site-guide.md)
 - [Working Group Lifecycle](instructions/working-group-lifecycle.md)
 - [Working Group Landmarks](instructions/working-group-landmarks.md)
-- [Link JupyterLab to GitHub](instructions/link-to-github.md)
+- [Connect JupyterLab to GitHub](instructions/link-to-github.md)
 - [Push and Pull with GitHub](instructions/push-to-github.md)
-- [Save Files to Persistent Storage](instructions/save-to-persistent-storage.md)
+- [Persistent Storage with GoCommands](instructions/save-to-persistent-storage.md)
 
 ## Data
 

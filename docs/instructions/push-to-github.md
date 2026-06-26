@@ -1,69 +1,110 @@
-# Push and Pull with GitHub
+# Push And Pull With The JupyterLab Git Widget
 
-This page covers moving code, Markdown, notebooks, meeting notes, and small project files between JupyterLab and GitHub.
+This page covers moving code, Markdown, notebooks, and small project files between your JupyterLab instance and GitHub. Do not use GitHub for large data. Use persistent storage for large files and outputs.
 
-Before using this page, complete [Link JupyterLab to GitHub](link-to-github.md). For large data and outputs, use [persistent storage](save-to-persistent-storage.md) instead of GitHub.
+## The Cloud Triangle Workflow
 
-## The Everyday Pattern
+In the Cloud Triangle, this page covers **instance to/from GitHub**.
 
-Start each work session by pulling the latest changes.
+!!! info "Cloud Triangle pages"
+    1. [Connect instance to GitHub](link-to-github.md)
+    2. **Instance to/from GitHub:** this page
+    3. [Instance to/from persistent storage](save-to-persistent-storage.md)
 
-1. Pull from GitHub.
-2. Edit files in JupyterLab or GitHub.
-3. Stage the files that belong in the change.
-4. Commit with a short message.
-5. Push back to GitHub.
+!!! tip "What goes where?"
+    Code and text go to GitHub. Large data and outputs go to persistent storage. Active work happens in JupyterLab.
 
-This rhythm keeps work visible to collaborators and prevents the working group from splitting into many disconnected copies of the same repository.
+| Task | Best tool |
+|---|---|
+| Edit the website text | GitHub / Git widget |
+| Save a notebook or script | GitHub / Git widget |
+| Save a small figure used on the site | GitHub / Git widget |
+| Save a large dataset | Persistent storage / `gocmd` |
+| Save model outputs or large intermediate files | Persistent storage / `gocmd` |
+| Work interactively during a session | JupyterLab |
+| Share final public code | GitHub |
+| Share final public data | Persistent storage or approved data archive |
 
-## Pull The Latest Changes
+GitHub is not the place for large raw datasets, huge rasters, model outputs, or temporary working files. Put those in persistent storage and commit a small note, README, or metadata file to GitHub that explains where the data lives.
 
-In the JupyterLab Git panel, click Pull before editing. This brings in changes that other participants have pushed.
+Before using this page, complete [Connect instance to GitHub](link-to-github.md) so HTTPS push and pull work from this JupyterLab instance.
 
-Pull first when you:
+[Launch the OASIS JupyterLab app](https://de.cyverse.org/apps/de/c0956b30-3f32-11f0-9712-008cfa5ae621/launch){ .md-button target="_blank" rel="noopener" }
 
-- start a new work session
-- switch between computers or compute instances
-- return after a meeting
-- begin editing a file someone else may have touched
+## 1. Open The Git Panel
 
-If the pull fails, pause and ask for help before doing a large amount of new work.
+1. Make sure you are in the **top-level folder of your repository** in the File Browser.
+2. On the **left sidebar**, click the **Git icon** (branch symbol). Two possible views appear.
 
-## Stage And Commit Your Edits
+### A. Not In A Repository
 
-After editing files, open the Git panel and review the changed files.
+If you are not inside a Git repo folder, the Git panel shows three large blue buttons:
 
-Stage only the files that belong together. A commit should describe one coherent change, such as:
+- **Open the FileBrowser** takes you back to the file browser.
+- **Initialize a Repository** turns the current folder into a new Git repo.
+- **Clone a Repository** copies an existing repo from GitHub into this environment.
+
+If you see this and you already cloned the repo, navigate into the correct repo folder in the File Browser and reopen the Git panel.
+
+If you have not cloned yet, go back to [Connect instance to GitHub](link-to-github.md) and clone with the HTTPS repository link.
+
+### B. Inside A Repository
+
+When you are in a repo folder, the Git panel shows:
+
+- **Current Repository** and **Current Branch**
+- **Changes** and **History** tabs
+- changed and untracked files
+- commit message fields
+- push and pull controls
+
+Small orange dots on push or pull controls usually mean there are changes waiting to move between GitHub and JupyterLab.
+
+## 2. Daily Workflow: Pull, Stage, Commit, Push
+
+### A. Pull Changes From GitHub
+
+Start by clicking **Pull**. This brings the latest work from GitHub into your JupyterLab instance.
+
+Pull first so you do not accidentally work on an older copy of the project.
+
+### B. Stage And Commit Your Edits
+
+1. Edit notebooks, scripts, Markdown pages, or small site assets.
+2. In the **Git panel -> Changes** tab, look under **Changed** and **Untracked**.
+3. Stage files by clicking the **`+`** next to each file, or use **Stage All** when you are sure every listed file belongs in the commit.
+4. Enter a short commit message in the **Summary** box.
+5. Click **Commit**.
+
+Commit messages should say what changed, such as:
 
 ```text
-Add kickoff meeting notes
+Add dissolved oxygen data notes
 ```
 
 or:
 
 ```text
-Update data access notes
+Update reef oxygen figure caption
 ```
 
-Good working group commits are small enough that someone else can understand them later.
+### C. Push Your Commits To GitHub
 
-## Push Your Commits
+Click **Push** to send your commits from JupyterLab back to GitHub.
 
-Click Push to send your commits back to GitHub. After pushing, refresh the GitHub repository or public site to confirm the change landed.
+After pushing, refresh the GitHub repository or public site to confirm the change landed.
 
-If the push is rejected, GitHub probably has newer changes that your instance does not have yet. Pull first, resolve any conflicts, commit, and push again.
+## 3. Coordinate With Collaborators
 
-## Coordinate Across Weeks Or Months
-
-Working groups continue beyond a single meeting, so coordination matters.
+When multiple people edit the same project, GitHub helps keep track of changes, but it still helps to coordinate.
 
 Use GitHub for:
 
-- documentation and public website text
-- scripts and notebooks
-- meeting notes and decision logs
-- small figures used on the website
-- README files that point to larger data
+- Markdown pages
+- scripts
+- notebooks
+- small figures used on the site
+- README files and notes that explain where data lives
 
 Use persistent storage for:
 
@@ -71,52 +112,49 @@ Use persistent storage for:
 - large rasters
 - model outputs
 - intermediate results
-- large tables
-- files that should survive after the compute instance stops
+- temporary files that should survive after the container stops
 
-Persistent storage is not a replacement for GitHub. It keeps large files available, but it does not provide the same version history, review workflow, or website publishing path.
+Persistent storage is not a replacement for GitHub. It keeps data safe, but it does not provide the same version history, issue tracking, pull requests, or website publishing workflow.
 
-## Simple Merge Conflicts
+## 4. Fixing Common Problems
 
-A merge conflict means Git found two edits to the same part of a file and needs a person to choose what remains.
+### Push Rejected
 
-Conflicted files may contain markers like this:
+Cause: GitHub has changes that your JupyterLab instance does not have yet.
+
+Fix: click **Pull** first. If conflicts appear, resolve them, commit, and push again.
+
+### Merge Conflicts
+
+Conflicted files contain blocks labeled with your version and the incoming version, separated by a divider. They usually look like this in the editor:
 
 ```text
 [start of your version]
 your edits
-[separator]
+[divider]
 teammate edits
 [end of incoming version]
 ```
 
-To resolve a simple conflict:
+Open the file, choose what should remain, delete the conflict markers, save, stage, commit, and push.
 
-1. Open the file.
-2. Decide what text should remain.
-3. Delete the conflict markers.
-4. Save the file.
-5. Stage, commit, and push.
+### Wrong Folder Or No Git Controls
 
-If the conflict is in a notebook, generated file, or a file you do not understand, ask for help before editing it.
+If you only see the three blue buttons, you may not be inside your repo folder. Use the File Browser to open the cloned repo and reopen the Git panel.
 
-## Large File Warning
+### GitHub Asks For Credentials Again
 
-If GitHub rejects a file because it is too large, move that file to persistent storage. Then commit a small README, metadata note, or website note that explains:
+Your web authentication may have timed out. Reopen `startup/github_web_auth.ipynb`, repeat the first-cell device login, then run the second cell again. The full steps are on [Connect instance to GitHub](link-to-github.md).
 
-- where the file is stored
-- what it contains
-- who created it
-- whether it is preliminary or final
-- how collaborators should use it
+### File Is Too Large For GitHub
 
-See [Save Files to Persistent Storage](save-to-persistent-storage.md) for transfer examples.
+Move the file to persistent storage with `gocmd`. Then commit a small note, README, or metadata file to GitHub explaining where the data lives. Use [Instance to/from persistent storage](save-to-persistent-storage.md) for the data transfer steps.
 
-## Quick Reference
+## 5. Quick Reference
 
-- Pull before you start editing.
+- Always **Pull** first.
 - Stage only the files that belong in the commit.
-- Commit with a short, specific message.
-- Push after committing.
-- Keep large data and outputs out of GitHub.
-- Leave notes in GitHub that point to persistent storage.
+- Commit with a short message.
+- Push your commits to GitHub.
+- Put large data and outputs in persistent storage.
+- Put code, Markdown, notebooks, and small website figures in GitHub.

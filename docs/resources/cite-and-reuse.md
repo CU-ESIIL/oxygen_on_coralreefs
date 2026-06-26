@@ -1,6 +1,6 @@
 # Cite And Reuse
 
-Working groups create materials that others may want to understand, cite, adapt, or build on. This page helps the group make outputs reusable without making the repository harder to maintain.
+This project creates materials that others may want to understand, cite, adapt, or build on. This page helps make outputs reusable without making the repository harder to maintain.
 
 ## Separate Preliminary Materials From Final Outputs
 
@@ -16,7 +16,7 @@ Use simple labels such as:
 
 ## Cite Datasets And Software
 
-When the group uses a dataset, software package, model, or workflow from someone else, record enough information for another person to find it.
+When the project uses a dataset, software package, model, or workflow from someone else, record enough information for another person to find it.
 
 Useful citation details include:
 
@@ -27,7 +27,7 @@ Useful citation details include:
 - license or terms of use
 - short note on how it was used
 
-If the repository uses a bibliography file, add references there and cite them in Markdown using the repository convention. If no bibliography file exists yet, keep citation notes in a simple Markdown references section until the group decides on a citation workflow.
+If the repository uses a bibliography file, add references there and cite them in Markdown using the repository convention. If no bibliography file exists yet, keep citation notes in a simple Markdown references section until the project settles on a citation workflow.
 
 ## Link To Archived Outputs
 
@@ -60,9 +60,9 @@ This information can live in a README beside the data in persistent storage, wit
 
 ## Add Licenses Where Appropriate
 
-The repository has a license for repository materials. Data, figures, software, and reports may need their own reuse notes depending on source data terms and group agreements.
+The repository has a license for repository materials. Data, figures, software, and reports may need their own reuse notes depending on source data terms and project agreements.
 
-When in doubt, ask ESIIL staff or your facilitator before adding a license statement to a data product or public output.
+When in doubt, ask ESIIL staff before adding a license statement to a data product or public output.
 
 ## Tell Others How To Reuse The Work
 
@@ -78,10 +78,10 @@ For each final output, add a short reuse note:
 Example:
 
 ```text
-Reuse note: This figure is a final working group output. Please cite the working group website and the archived dataset listed in the figure caption. Source notebook: notebooks/figure-01.ipynb. Large intermediate files are stored in persistent storage with a README describing provenance and processing.
+Reuse note: This figure is a final project output. Please cite the project website and the archived dataset listed in the figure caption. Source notebook: notebooks/figure-01.ipynb. Large intermediate files are stored in persistent storage with a README describing provenance and processing.
 ```
 
 Related pages:
 
 - [Cloud Triangle](cloud-triangle.md)
-- [Save Files to Persistent Storage](../instructions/save-to-persistent-storage.md)
+- [Instance to/from persistent storage](../instructions/save-to-persistent-storage.md)

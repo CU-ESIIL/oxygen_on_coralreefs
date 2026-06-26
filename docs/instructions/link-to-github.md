@@ -1,114 +1,183 @@
 # Link JupyterLab to GitHub
 
-This page connects a running JupyterLab instance to GitHub so participants can clone the working group repository and move small project files between the instance and GitHub.
+This page connects your running JupyterLab instance to GitHub so you can clone the project repository and use HTTPS push/pull from the Git sidebar.
 
-GitHub is where this working group keeps code, Markdown pages, notebooks, meeting notes, small figures, and public website content. Persistent storage is where large data and large outputs belong. The compute instance is where active work happens.
+## The Cloud Triangle Workflow
 
-Before using this page, review the [Cloud Triangle guide](../resources/cloud-triangle.md).
+In this workflow, your work moves between three connected places.
 
-## Why The Instance Needs GitHub Access
+**JupyterLab** is where you actively work. It is fast and flexible, but the running container is temporary.
 
-The JupyterLab instance is useful for analysis, but it is not the long-term record of the working group. Connecting it to GitHub lets participants:
+**GitHub** is where this project website, Markdown pages, notebooks, scripts, and small figures live. Use GitHub for collaboration and for anything that should be versioned with the public project.
 
-- pull the latest scripts, notebooks, notes, and website files
-- commit useful changes with version history
-- push work back so collaborators can see it
-- keep the public website synchronized with the repository
+**Persistent storage** is where larger files live. Use it for raw data, intermediate outputs, model results, large figures, and anything too large or too temporary for GitHub.
 
-For most participants, the recommended path is GitHub web authentication with an HTTPS clone link. This avoids managing SSH keys in a temporary compute environment.
+A simple rule: **work in JupyterLab, push code and text to GitHub, and save large data or outputs to persistent storage.**
 
-## Step 1: Launch The JupyterLab Instance
+!!! info "Cloud Triangle pages"
+    1. **Connect instance to GitHub:** this page
+    2. [Instance to/from GitHub](push-to-github.md)
+    3. [Instance to/from persistent storage](save-to-persistent-storage.md)
 
-Open the working group JupyterLab or CyVerse VICE app provided by ESIIL staff or your facilitator. Wait for the instance to finish starting.
+!!! tip "The basic OASIS workflow"
+    1. Launch JupyterLab.
+    2. Authenticate to GitHub.
+    3. Pull the latest code and text from GitHub.
+    4. Work in JupyterLab.
+    5. Save large files to persistent storage with `gocmd`.
+    6. Commit and push small project files back to GitHub.
 
-Some OASIS images include a startup notebook for GitHub authentication:
+| Task | Best tool |
+|---|---|
+| Edit the website text | GitHub / Git widget |
+| Save a notebook or script | GitHub / Git widget |
+| Save a small figure used on the site | GitHub / Git widget |
+| Save a large dataset | Persistent storage / `gocmd` |
+| Save model outputs or large intermediate files | Persistent storage / `gocmd` |
+| Work interactively during a session | JupyterLab |
+| Share final public code | GitHub |
+| Share final public data | Persistent storage or approved data archive |
+
+This page covers the first connection: JupyterLab to GitHub. After this works, use the [Git widget page](push-to-github.md) to pull, commit, and push code and Markdown. Use the [persistent storage page](save-to-persistent-storage.md) for large data and outputs.
+
+GitHub web authentication is usually the easiest way to connect JupyterLab to GitHub. You run a small notebook, copy a one-time code, approve the login in GitHub, and then return to JupyterLab to finish setup.
+
+## Step 1: Launch The OASIS JupyterLab App
+
+[Launch the OASIS JupyterLab app](https://de.cyverse.org/apps/de/c0956b30-3f32-11f0-9712-008cfa5ae621/launch){ .md-button target="_blank" rel="noopener" }
+
+Click the launch button and wait for the CyVerse/VICE JupyterLab instance to start. This can take a few minutes.
+
+The container may open with a `startup` folder. Inside that folder is the notebook you use for GitHub login:
 
 ```text
 startup/github_web_auth.ipynb
 ```
 
-If your instance does not include this notebook, ask ESIIL staff or your facilitator which GitHub authentication method is currently supported for your environment.
+If your environment does not include this notebook, ask ESIIL staff which GitHub authentication method is currently supported.
 
 ## Step 2: Open The GitHub Web Auth Notebook
 
-In JupyterLab, use the file browser to open:
+In JupyterLab, use the file browser on the left to open:
 
 ```text
 startup/github_web_auth.ipynb
 ```
 
-Run the first cell. It should start GitHub web authentication and print:
+This notebook handles GitHub web authentication for the running JupyterLab instance.
 
-- a one-time code
+## Step 3: Run The First Cell And Approve GitHub Login
+
+Run the first notebook cell.
+
+It starts GitHub CLI web authentication and prints two important things:
+
+- a one-time code, such as `6C3C-5CE8`
 - a GitHub device login link, usually `https://github.com/login/device`
 
-Copy the one-time code, open the device login link in a browser, paste the code, and approve the GitHub login.
+Then:
 
-## Step 3: Save The Authentication
+1. Copy the one-time code from the notebook output.
+2. Open the GitHub device login link in a browser.
+3. Paste the code when GitHub asks for it.
+4. Continue through the GitHub authorization screens.
+5. Approve the authentication.
 
-After GitHub says authentication is complete, return to `startup/github_web_auth.ipynb` and run the second cell.
+There may be several clicks and device authentication steps. That is normal.
 
-This configures Git in the running JupyterLab instance to use the GitHub authentication you just approved. After this step, HTTPS pull and push should work from the Git sidebar or terminal.
+## Step 4: Run The Second Cell To Save The Authentication
 
-GitHub authentication can expire, especially if an instance is left running for a long time. If Git asks for credentials again, repeat the web authentication steps.
+After GitHub says authentication is complete, return to `startup/github_web_auth.ipynb`.
 
-## Step 4: Add Git Identity If Asked
+Run the second notebook cell.
 
-Authentication proves you can access GitHub. Git may still need to know who should be credited for commits.
+This configures Git to use the GitHub web authentication you just approved. After this step, Git pushes and pulls should work through HTTPS in this JupyterLab instance.
 
-If Git asks for your name or email, use the identity you want attached to repository commits. In a terminal, the commands look like:
+## Step 5: Add Git Identity On First Commit Or Push
 
-```bash
-git config --global user.name "Your Name"
-git config --global user.email "your-email@example.edu"
-```
+Authentication proves that you have access to GitHub. Git may still need to know who should be credited for the commits you make.
 
-Use the same email associated with your GitHub account if possible.
+On your first commit or push, Git may ask for:
 
-## Step 5: Clone The Working Group Repository
+- your GitHub name
+- your GitHub email
 
-Before cloning, make sure the JupyterLab file browser is at a top-level workspace folder, not inside a data folder.
+This is normal. It tells Git who should be credited for changes made from this JupyterLab instance.
 
-Use the HTTPS clone link for this workflow:
+## Step 6: Clone This Repository Using HTTPS
 
-```text
-https://github.com/CU-ESIIL/Working_group_OASIS.git
-```
+Before cloning, make sure the file browser is at the top folder level. You should see folders such as `data`, `home`, `oxygen_on_coralreefs`, or `startup`.
 
-If your group has already created its own repository from this template, use your group repository URL instead.
+Do not clone from inside `data` or `home`; the Git sidebar works best when you start from the top level.
 
-To clone from the JupyterLab Git panel:
+Then clone the repository:
 
 1. Click the Git icon in the left sidebar.
-2. Choose Clone a Repository.
-3. Paste the HTTPS repository link.
-4. Click Clone.
-5. Confirm that the repository appears in the file browser.
+2. Use the blue Git action buttons.
+3. Click **Clone a Repository**.
+4. Paste the HTTPS repository link.
+5. Click **Clone**.
+6. Confirm that the repository appears in the left file browser.
 
-## Step 6: Pull Before Working
+Use the HTTPS clone link for this workflow. This is different from the SSH clone link used in older instructions. SSH still works as a backup for advanced users, but HTTPS is the recommended path.
 
-Start each work session by pulling the latest changes. Working groups often edit over weeks or months, so someone else may have updated the repository since your last session.
+### How To Copy The HTTPS Clone Link
 
-Use GitHub for:
+1. Open this project repository on GitHub.
+2. Click the green **Code** button.
+3. Choose the **HTTPS** tab.
+4. Copy the URL. It should look like:
 
-- scripts and notebooks
-- Markdown pages
-- meeting notes
-- small figures and website assets
-- README files and metadata notes
+```text
+https://github.com/CU-ESIIL/oxygen_on_coralreefs.git
+```
 
-Do not use GitHub for raw rasters, large datasets, large model outputs, or temporary scratch files. Move those files to persistent storage and commit a small note explaining where they live.
+## Step 7: Push And Pull Changes
+
+After the repository is cloned and web authentication is configured, you should be able to push and pull using the JupyterLab Git interface.
+
+Use GitHub for code, Markdown, notebooks, and small files that should be versioned with the public project. Do not use GitHub for large raw datasets, huge rasters, model outputs, or temporary working files. Put those in persistent storage and commit a small note, README, or metadata file to GitHub that explains where the data lives.
+
+For the usual editing workflow, use:
+
+1. **Pull** before you start editing.
+2. Edit files.
+3. Stage changed files.
+4. Commit with a short message.
+5. Push your commits to GitHub.
+
+See [Push and Pull with the JupyterLab Git Widget](push-to-github.md) for the day-to-day Git sidebar workflow.
+
+## If Authentication Stops Working
+
+GitHub web authentication can expire, especially if the instance is left running for a few days.
+
+Common symptoms:
+
+- pushing stops working
+- GitHub or Git asks for credentials again
+- the Git interface no longer has permission
+
+Fix it by repeating the notebook authentication:
+
+1. Reopen `startup/github_web_auth.ipynb`.
+2. Run the first cell.
+3. Copy the new one-time code.
+4. Approve the GitHub device login.
+5. Return to the notebook.
+6. Run the second cell again.
+
+You do not need to reclone the repository just because authentication expired.
 
 ## SSH Backup Option
 
-SSH can still work for participants who already know how to manage SSH keys in temporary JupyterLab environments, but it is not the recommended first path here.
+SSH is not the main workflow here. Use GitHub web authentication and HTTPS cloning first.
 
-If you use SSH, create an SSH key inside the instance, add the public key to GitHub under SSH and GPG keys, and clone with an SSH URL such as:
+Advanced users can still use SSH as a backup if they already know how to manage keys in temporary JupyterLab environments:
 
-```text
-git@github.com:CU-ESIIL/Working_group_OASIS.git
-```
+1. Create an SSH key inside the running JupyterLab instance.
+2. Add the public key to GitHub under **Settings -> SSH and GPG keys**.
+3. Use the SSH clone link, which looks like `git@github.com:ORG/REPO.git`.
+4. Make sure the repository remote uses SSH instead of HTTPS.
 
-If you are unsure which method to use, use web authentication and the HTTPS clone link.
-
-Next page: [Push and Pull with GitHub](push-to-github.md)
+If you are unsure which path to use, use the web authentication notebook and the HTTPS clone link.
