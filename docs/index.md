@@ -2,7 +2,7 @@
 
 This repository and website support Wyatt Million's ESIIL project on dissolved oxygen dynamics and coral reef ecology. The repository is the working record for data, analysis, notes, and synthesis; the website is the public-facing layer for project context, methods, and outputs.
 
-[Edit this homepage in GitHub](https://github.com/CU-ESIIL/oxygen_on_coralreefs/edit/main/docs/index.md){ .md-button .md-button--secondary }
+[Access data associated with the project](https://github.com/CU-ESIIL/oxygen_on_coralreefs/tree/main/data){ .md-button .md-button--secondary }
 [Open the GitHub repository](https://github.com/CU-ESIIL/oxygen_on_coralreefs){ .md-button }
 [Read the project proposal](https://github.com/CU-ESIIL/oxygen_on_coralreefs/blob/main/Research_Statement_WM.pdf){ .md-button .md-button--secondary }
 
